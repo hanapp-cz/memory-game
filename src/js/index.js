@@ -2,7 +2,13 @@ import '../css/style.css';
 import Card from './Card';
 import Countries from './Countries';
 
-//https://restcountries.eu/rest/v2/region/europe
+/** Global state of the app
+ * - Rendered cards array cardDeck
+ * - Currently turned cards
+ * - Matched (permanetly turned) cards
+ */
+const state = {};
+
 const gameContainer = document.querySelector('.game-container');
 const startButton = document.querySelector('.start-btn');
 
@@ -42,16 +48,32 @@ const renderCards = function (cardsToPick) {
 };
 
 const flip = function (event) {
-  const card = event.target.closest('.card');
-  card.classList.toggle('flip');
+  const cardElement = event.target.closest('.card');
+  cardElement.classList.toggle('flip');
+  const currId = cardElement.id;
+  console.log(currId);
+
+  const currCard = state.cardDeck.find(el => {
+    if (el._id == currId) {
+      return true;
+    }
+  });
+  console.log(currCard);
+
+  // state.turned = [state.cardDeck[]]
 };
 
 startButton.addEventListener('click', async function () {
-  const data = await countriesApiService.getData('europe');
-  const cards = selectCards(data, 10);
-  // Copy cards array
-  const cardsToPick = cards.slice();
-  renderCards(cardsToPick);
+  try {
+    const data = await countriesApiService.getData('europe');
+    const cards = selectCards(data, 10);
+    // Copy cards array
+    state.cardDeck = cards;
+    const cardsToPick = cards.slice();
+    renderCards(cardsToPick);
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 gameContainer.addEventListener('click', flip);
