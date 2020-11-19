@@ -25,14 +25,14 @@ export default class Card {
     return element;
   }
 
-  createCard() {
+  createCard(frontTextStr = '❤') {
     const card = this.createClassElement('div', ['card']);
     card.setAttribute('id', this._id);
     const cardInner = this.createClassElement('div', ['card-inner']);
     const cardFront = this.createClassElement('div', ['card-front']);
     const cardBack = this.createClassElement('div', ['card-back']);
     const frontText = document.createElement('p');
-    frontText.append('❤');
+    frontText.append(frontTextStr);
     cardFront.append(frontText);
     if (this._img) {
       const img = document.createElement('img');
