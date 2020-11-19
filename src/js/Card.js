@@ -26,7 +26,7 @@ export default class Card {
   }
 
   createCard(frontTextStr = '❤') {
-    const card = this.createClassElement('div', ['card']);
+    const card = this.createClassElement('div', ['card', 'active']);
     card.setAttribute('id', this._id);
     const cardInner = this.createClassElement('div', ['card-inner']);
     const cardFront = this.createClassElement('div', ['card-front']);
@@ -46,7 +46,7 @@ export default class Card {
     }
     cardInner.append(cardFront, cardBack);
     card.append(cardInner);
-    console.log(card);
+
     return card;
   }
 }

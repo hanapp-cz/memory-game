@@ -11,7 +11,7 @@ export default class Countries {
       const res = await fetch(`${this._url}${region}`);
       if (!res.ok) throw new Error(`Problem getting data. ${res.statusText}`);
       const data = await res.json();
-      console.log(data);
+
       return data;
     } catch (err) {
       console.error(err);
