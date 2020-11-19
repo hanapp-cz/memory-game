@@ -57,12 +57,15 @@ gameContainer.addEventListener('click', event => {
             el.classList.remove('match', 'flip');
             el.classList.replace('active', 'hidden');
           });
-          state.matched.push(...state.turned.map(el => el.id));
-          state.turned.splice(0);
+          state.matched.push(...state.turned.splice(0));
+
           console.log(state.matched);
           if (state.matched.length >= state.cardDeck.length) {
             state.win = true;
             game.winner();
+            state.matched.forEach(el => {
+              el.classList.replace('hidden', 'flip');
+            });
           }
         }, 2000);
       } else {
