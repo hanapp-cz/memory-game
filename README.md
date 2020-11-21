@@ -1,4 +1,3 @@
-# Výchozí šablona pro naše lekce a domácí úkoly
 
 ### Jak spustit
 
