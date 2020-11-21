@@ -4,10 +4,10 @@ import Countries from './Countries';
 import * as game from './game';
 
 /** Global state of the app
- * - Currently turned cards
- * - Matched (permanetly turned) cards
- * - Rendered cards array cardDeck
+ * - Game statut
  * - Number of moves
+ * - Currently turned cards
+ * - Matched cards
  */
 const state = {
   win: false,
@@ -25,18 +25,24 @@ const countriesApiService = new Countries(
 elements.settings.addEventListener('submit', async function (event) {
   try {
     event.preventDefault();
+    // get input from form
     const settings = new FormData(event.target);
     state.settings = Object.fromEntries(settings);
+    // reset the global state
     state.win = false;
     state.moves = 0;
     state.matched = [];
     state.turned = [];
 
+    // fetch the data
     const data = await countriesApiService.getData(state.settings.continent);
+
+    // pick the number of pairs based on chosen difficulty
     const cards = game.selectCards(data, Number(state.settings.difficulty));
-    // Copy cards array
+    // copy cards array and store current deck in the state variable
     state.cardDeck = cards;
     const cardsToPick = cards.slice();
+    // render cards, moves, matches
     game.renderCards(cardsToPick, state.settings.continent);
     game.renderMoves(state.moves);
     game.renderMatches(state.matched.length / 2, state.settings.difficulty);
@@ -48,15 +54,18 @@ elements.settings.addEventListener('submit', async function (event) {
 
 gameContainer.addEventListener('click', event => {
   let currCard;
+  // if game is on and there are not 2 turned cards yet, turn card
   if (state.turned.length < 2 && !state.win) currCard = game.flip(event);
 
   if (currCard) {
+    // add card to currently turned cards
     state.turned ? state.turned.push(currCard) : (state.turned = [currCard]);
     if (state.turned.length === 2) {
       // two cards turned
       state.moves++;
       game.renderMoves(state.moves);
       if (
+        // condition for match
         Math.abs(state.turned[0].id - state.turned[1].id) ==
         state.cardDeck.length / 2
       ) {
