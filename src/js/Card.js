@@ -32,7 +32,9 @@ export default class Card {
     const cardFront = this.createClassElement('div', ['card-front']);
     const cardBack = this.createClassElement('div', ['card-back']);
     const frontText = document.createElement('p');
-    frontText.append(frontTextStr);
+    frontText.append(
+      frontTextStr.replace(frontTextStr[0], frontTextStr[0].toUpperCase())
+    );
     cardFront.append(frontText);
     if (this._img) {
       const img = document.createElement('img');

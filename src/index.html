@@ -3,21 +3,89 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Ubuntu:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <title>Pexeso</title>
   </head>
   <body>
     <header>
       <div class="header-container">
         <h2>Memory</h2>
-        <button class="start-btn">Start</button>
+        <h3>match flags to their country names</h3>
+        <form id="game-settings">
+          <div class="set-continent">
+            <label class="radio-btn-container" for="europe"
+              ><input
+                type="radio"
+                id="europe"
+                name="continent"
+                value="europe"
+                checked
+              /><span class="checkmark"></span>Europe
+            </label>
+            <label class="radio-btn-container" for="africa"
+              ><input
+                type="radio"
+                id="africa"
+                name="continent"
+                value="africa"
+              /><span class="checkmark"></span>Africa
+            </label>
+            <label class="radio-btn-container" for="americas"
+              ><input
+                type="radio"
+                id="americas"
+                name="continent"
+                value="americas"
+              /><span class="checkmark"></span>Americas
+            </label>
+            <label class="radio-btn-container" for="asia"
+              ><input
+                type="radio"
+                id="asia"
+                name="continent"
+                value="asia"
+              /><span class="checkmark"></span>Asia
+            </label>
+            <label class="radio-btn-container" for="oceania"
+              ><input
+                type="radio"
+                id="oceania"
+                name="continent"
+                value="oceania"
+              /><span class="checkmark"></span>Oceania
+            </label>
+          </div>
+          <div class="set-difficulty">
+            <label class="radio-btn-container" for="easy">
+              <input
+                type="radio"
+                id="easy"
+                name="difficulty"
+                value="6"
+                checked
+              />
+              <span class="checkmark"></span>Easy
+            </label>
+            <label class="radio-btn-container" for="medium">
+              <input type="radio" id="medium" name="difficulty" value="12" />
+              <span class="checkmark"></span>Medium
+            </label>
+            <label class="radio-btn-container" for="hard">
+              <input type="radio" id="hard" name="difficulty" value="18" />
+              <span class="checkmark"></span>Hard
+            </label>
+          </div>
+          <button type="submit" class="start-btn">start</button>
+        </form>
       </div>
     </header>
-
-    <!-- <form id="search-country">
-      <label>Search country</label>
-      <input type="text" placeholder="country name..." />
-      <button type="submit">OK</button>
-    </form> -->
 
     <div class="game-container">
       <!-- <div class="card"></div> -->

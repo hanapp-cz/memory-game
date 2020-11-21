@@ -23,14 +23,17 @@ const countriesApiService = new Countries(
   'https://restcountries.eu/rest/v2/region/'
 );
 
-startButton.addEventListener('click', async function () {
+elements.settings.addEventListener('submit', async function (event) {
   try {
-    const data = await countriesApiService.getData('europe');
-    const cards = game.selectCards(data, 2);
+    event.preventDefault();
+    const settings = new FormData(event.target);
+    state.settings = Object.fromEntries(settings);
+    const data = await countriesApiService.getData(state.settings.continent);
+    const cards = game.selectCards(data, Number(state.settings.difficulty));
     // Copy cards array
     state.cardDeck = cards;
     const cardsToPick = cards.slice();
-    game.renderCards(cardsToPick);
+    game.renderCards(cardsToPick, state.settings.continent);
   } catch (err) {
     console.error(err);
   }

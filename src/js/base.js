@@ -1,6 +1,7 @@
 export const elements = {
   gameContainer: document.querySelector('.game-container'),
-  startButton: document.querySelector('.start-btn'),
+  headerContainer: document.querySelector('.header-container'),
+  settings: document.querySelector('#game-settings'),
 };
 
 /* export const elementStrings = {

@@ -1,30 +1,97 @@
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #eee;
+  font-family: 'Ubuntu', sans-serif;
+  background-color: #def7b5;
   box-sizing: border-box;
+  color: #606b4e;
 }
 
-h2 {
-  color: #ad175d;
-  font-size: 30px;
+h2,
+h3 {
+  font-size: 60px;
+  font-family: 'Dancing Script', cursive;
   text-align: center;
-  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.233);
-  text-transform: uppercase;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.233);
+  margin-bottom: 30px;
+}
+h3 {
+  font-size: 28px;
+  margin-bottom: 50px;
 }
 
 button {
-  color: #ad175d;
-  width: 100px;
-  height: 30px;
-  font-size: 20px;
+  padding: 5px 30px;
+  font-size: 30px;
   text-align: center;
-  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.233);
-  text-transform: uppercase;
-  background-color: #eee;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.233);
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.055);
+  font-family: 'Dancing Script', cursive;
+  color: #def7b5;
+  background-color: #606b4e;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.233);
   border-radius: 6px;
   border: none;
-  margin-bottom: 20px;
+  margin: 15px 0px;
+}
+
+header {
+  margin-bottom: 30px;
+}
+
+/* Customize the label (the container) */
+.radio-btn-container {
+  display: flex;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  align-items: flex-start;
+}
+
+/* Hide the browser's default radio button */
+.radio-btn-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  display: flex;
+  margin-right: 8px;
+  height: 16px;
+  width: 16px;
+  border: 2px solid #606b4e;
+  border-radius: 6px;
+}
+
+/* On mouse-over, add a grey background color */
+.radio-btn-container:hover input ~ .checkmark {
+  background-color: #606b4e;
+}
+
+/* When the radio button is checked, add a blue background */
+.radio-btn-container input:checked ~ .checkmark {
+  background-color: #606b4e;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio-btn-container input:checked ~ .checkmark:after {
+  display: flex;
+}
+
+/* Style the indicator (dot/circle) */
+.radio-btn-container .checkmark:after {
+  width: 8px;
+  height: 8px;
+  border-radius: 6px;
 }
 
 .header-container {
@@ -32,18 +99,35 @@ button {
   flex-direction: column;
   align-items: center;
 }
+.header-container div {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+#game-settings {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.set-difficulty,
+.set-continent {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 
 .game-container {
   margin: auto;
-  max-width: 900px;
-  max-height: 900px;
+  max-width: 750px;
+  max-height: 750px;
   display: flex;
 
   justify-content: center;
   align-content: space-around;
   flex-wrap: wrap;
   border-radius: 6px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.233);
+  /* box-shadow: 0 10px 40px rgba(0, 0, 0, 0.233); */
 }
 
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
@@ -56,7 +140,7 @@ button {
   border-radius: 6px;
   border: 4px solid transparent;
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.233);
+  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.096);
   align-content: center;
   background-color: transparent;
   perspective: 1000px; /*Remove this if you don't want the 3D effect */
@@ -83,22 +167,23 @@ button {
   transform: rotateY(180deg);
 }
 
-.hidden .card-inner {
+.hidden {
   visibility: hidden;
 }
 
 .match {
   transition: border 0.8s linear 0.8s;
-  border: 4px solid #6bb846;
+  border: 4px solid #889e64;
 }
 .no-match {
   transition: border 0.8s linear 0.8s;
-  border: 4px solid #e02907;
+  border: 4px solid #eba394;
 }
 
 /* Position the front and back side */
 .card-front,
 .card-back {
+  background-color: #d3ebac;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -108,8 +193,9 @@ button {
 
 /* Style the front side (fallback if image is missing) */
 .card-front {
-  background-color: #eee;
-  color: #ad175d;
+  font-family: 'Dancing Script', cursive;
+  color: #6e6e6e;
+  font-size: 25px;
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -118,8 +204,7 @@ button {
 
 /* Style the back side */
 .card-back {
-  background-color: #eee;
-  color: #ad175d;
+  color: #6e6e6e;
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -128,17 +213,15 @@ button {
 }
 
 .win {
-  color: #ad175d;
+  color: #6e6e6e;
   font-weight: bold;
   font-size: 30px;
   text-align: center;
-  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.233);
-  text-transform: uppercase;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.233);
   position: absolute;
   top: 0px;
   width: 900px;
-  height: 150px;
-  background-color: #eee;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.233);
+  height: 900px;
+  /* box-shadow: 0 10px 40px rgba(0, 0, 0, 0.233); */
   border-radius: 6px;
 }
