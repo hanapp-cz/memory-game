@@ -211,6 +211,19 @@ header {
   justify-content: center;
   transform: rotateY(180deg);
 }
+.run-container {
+  opacity: 0;
+  display: flex;
+  max-width: 650px;
+  margin: auto;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.moves,
+.matches {
+  font-size: 16px;
+  font-weight: bold;
+}
 
 .win {
   color: #6e6e6e;
@@ -221,7 +234,11 @@ header {
   position: absolute;
   top: 0px;
   width: 900px;
-  height: 900px;
+  height: 350px;
   /* box-shadow: 0 10px 40px rgba(0, 0, 0, 0.233); */
   border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }

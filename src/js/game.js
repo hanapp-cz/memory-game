@@ -59,6 +59,38 @@ const createClassElement = (el, classNames) => {
   return element;
 };
 
+export const hideMatched = function (el) {
+  el.classList.remove('match', 'flip');
+  el.classList.replace('active', 'hidden');
+};
+
+export const turnBack = function (el) {
+  el.classList.remove('no-match');
+  el.classList.remove('flip');
+};
+
+export const showAll = function (el) {
+  el.classList.replace('hidden', 'flip');
+};
+
+export const renderMoves = function (moves) {
+  const movesSpan = elements.moves;
+  movesSpan.textContent = `moves: ${moves}`;
+};
+
+export const renderMatches = function (matches, max) {
+  const matchesSpan = elements.matches;
+  matchesSpan.textContent = `matches: ${matches}/${max}`;
+};
+
+export const loadGame = function () {
+  console.log('Game will be loaded soon');
+  document.querySelector('.win').remove();
+  elements.headerContainer.classList.remove('hidden');
+  elements.gameContainer.innerHTML = '';
+  elements.runContainer.style.opacity = 0;
+};
+
 export const winner = () => {
   const div = createClassElement('div', ['win']);
   const btn = createClassElement('button', ['new-game']);
@@ -68,6 +100,7 @@ export const winner = () => {
   h2.append(text);
   btn.append(btnLabel);
   div.append(h2, btn);
+  btn.addEventListener('click', loadGame);
   elements.gameContainer.append(div);
   elements.headerContainer.classList.add('hidden');
 };

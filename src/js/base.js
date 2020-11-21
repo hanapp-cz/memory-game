@@ -2,6 +2,11 @@ export const elements = {
   gameContainer: document.querySelector('.game-container'),
   headerContainer: document.querySelector('.header-container'),
   settings: document.querySelector('#game-settings'),
+  runContainer: document.querySelector('.run-container'),
+  moves: document.querySelector('.moves'),
+  matches: document.querySelector('.matches'),
+  newGameBtn: document.querySelector('.new-game'),
+  winContainer: document.querySelector('.win'),
 };
 
 /* export const elementStrings = {
