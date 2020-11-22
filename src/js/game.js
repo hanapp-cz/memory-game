@@ -23,7 +23,6 @@ const shuffle = function (arr) {
     const j = Math.floor(Math.random() * i);
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
-  console.log(arr);
   return arr;
 };
 
