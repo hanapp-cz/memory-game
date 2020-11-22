@@ -83,7 +83,6 @@ export const renderMatches = function (matches, max) {
 };
 
 export const loadGame = function () {
-  console.log('Game will be loaded soon');
   document.querySelector('.win').remove();
   elements.headerContainer.classList.remove('hidden');
   elements.gameContainer.innerHTML = '';
