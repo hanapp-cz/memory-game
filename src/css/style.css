@@ -114,15 +114,29 @@ header {
 .set-continent {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
+  margin: auto;
+  padding: 0 20px;
+}
+
+@media only screen and (max-width: 650px) {
+  .radio-btn-container {
+    padding-left: 25px;
+    font-size: 14px;
+  }
+  .checkmark {
+    height: 12px;
+    width: 12px;
+    border: 2px solid #606b4e;
+    border-radius: 6px;
+  }
 }
 
 .game-container {
   margin: auto;
   max-width: 750px;
-  max-height: 750px;
   display: flex;
-
   justify-content: center;
   align-content: space-around;
   flex-wrap: wrap;
@@ -216,7 +230,8 @@ header {
   display: flex;
   max-width: 650px;
   margin: auto;
-  justify-content: space-between;
+  padding: 0 20px;
+  justify-content: space-around;
   margin-bottom: 30px;
 }
 .moves,
