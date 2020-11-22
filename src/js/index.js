@@ -57,7 +57,7 @@ gameContainer.addEventListener('click', event => {
   // if game is on and there are not 2 turned cards yet, turn card
   if (state.turned.length < 2 && !state.win) currCard = game.flip(event);
 
-  if (currCard) {
+  if (currCard && currCard.id != state.turned[0]?.id) {
     // add card to currently turned cards
     state.turned ? state.turned.push(currCard) : (state.turned = [currCard]);
     if (state.turned.length === 2) {
