@@ -135,6 +135,7 @@ header {
 
 .game-container {
   margin: auto;
+  margin-bottom: 50px;
   max-width: 750px;
   display: flex;
   justify-content: center;
@@ -241,7 +242,7 @@ header {
 }
 
 .win {
-  color: #6e6e6e;
+  color: #606b4e;
   font-weight: bold;
   font-size: 30px;
   text-align: center;
