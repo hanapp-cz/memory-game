@@ -1,10 +1,10 @@
 import '../css/style.css';
-import { elements } from './base';
+import { elements, renderLoader, clearLoader } from './base';
 import Countries from './Countries';
 import * as game from './game';
 
 /** Global state of the app
- * - Game statut
+ * - Game status
  * - Number of moves
  * - Currently turned cards
  * - Matched cards
@@ -25,6 +25,8 @@ const countriesApiService = new Countries(
 elements.settings.addEventListener('submit', async function (event) {
   try {
     event.preventDefault();
+    gameContainer.innerHTML = '';
+    renderLoader(gameContainer);
     // get input from form
     const settings = new FormData(event.target);
     state.settings = Object.fromEntries(settings);
@@ -36,7 +38,7 @@ elements.settings.addEventListener('submit', async function (event) {
 
     // fetch the data
     const data = await countriesApiService.getData(state.settings.continent);
-
+    clearLoader();
     // pick the number of pairs based on chosen difficulty
     const cards = game.selectCards(data, Number(state.settings.difficulty));
     // copy cards array and store current deck in the state variable
@@ -70,6 +72,7 @@ gameContainer.addEventListener('click', event => {
         state.cardDeck.length / 2
       ) {
         // matched cards - green border for 2 seconds and hide matched cards
+
         state.turned.forEach(el => {
           el.classList.add('match');
         });
@@ -83,7 +86,7 @@ gameContainer.addEventListener('click', event => {
           // if all cards are matched, end of the game - turn all cards to review and display win screen
           if (state.matched.length >= state.cardDeck.length) {
             state.win = true;
-            game.winner();
+            game.winner(state.moves);
             state.matched.forEach(game.showAll);
             state.matched = [];
             state.moves = 0;

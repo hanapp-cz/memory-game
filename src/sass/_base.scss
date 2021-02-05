@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
+  color: $color-text-dark;
+  background-image: linear-gradient(
+    to right bottom,
+    $color-primary-light,
+    $color-primary
+  );
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+::selection {
+  background-color: $color-primary-dark;
+  color: $color-text-light;
+}

@@ -6,88 +6,130 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Ubuntu:wght@300&display=swap"
       rel="stylesheet"
+      type="text/css"
     />
-    <title>Pexeso</title>
+    <title>Memory</title>
   </head>
   <body>
     <header>
-      <div class="header-container">
-        <h2>Memory</h2>
-        <h3>match flags to their country names</h3>
-        <form id="game-settings">
-          <div class="set-continent">
-            <label class="radio-btn-container" for="europe"
-              ><input
-                type="radio"
-                id="europe"
-                name="continent"
-                value="europe"
-                checked
-              /><span class="checkmark"></span>Europe
-            </label>
-            <label class="radio-btn-container" for="africa"
-              ><input
-                type="radio"
-                id="africa"
-                name="continent"
-                value="africa"
-              /><span class="checkmark"></span>Africa
-            </label>
-            <label class="radio-btn-container" for="americas"
-              ><input
-                type="radio"
-                id="americas"
-                name="continent"
-                value="americas"
-              /><span class="checkmark"></span>Americas
-            </label>
-            <label class="radio-btn-container" for="asia"
-              ><input
-                type="radio"
-                id="asia"
-                name="continent"
-                value="asia"
-              /><span class="checkmark"></span>Asia
-            </label>
-            <label class="radio-btn-container" for="oceania"
-              ><input
-                type="radio"
-                id="oceania"
-                name="continent"
-                value="oceania"
-              /><span class="checkmark"></span>Oceania
-            </label>
-          </div>
-          <div class="set-difficulty">
-            <label class="radio-btn-container" for="easy">
-              <input
-                type="radio"
-                id="easy"
-                name="difficulty"
-                value="6"
-                checked
-              />
-              <span class="checkmark"></span>Easy
-            </label>
-            <label class="radio-btn-container" for="medium">
-              <input type="radio" id="medium" name="difficulty" value="12" />
-              <span class="checkmark"></span>Medium
-            </label>
-            <label class="radio-btn-container" for="hard">
-              <input type="radio" id="hard" name="difficulty" value="18" />
-              <span class="checkmark"></span>Hard
-            </label>
-          </div>
-          <button type="submit" class="start-btn">start</button>
-        </form>
+      <div class="header__container">
+        <h1 class="heading-primary u-margin-bottom-medium">Memory</h1>
+        <h2 class="heading-secondary">match flags to their country names</h2>
       </div>
     </header>
-    <div class="run-container">
-      <span class="moves">moves: 0</span>
-      <span class="matches">matched: 0/6</span>
-    </div>
-    <div class="game-container">
-      <!-- <div class="card"></div> -->
-    </div>
+    <section class="settings u-margin-bottom-small">
+      <div class="settings__form">
+        <form id="game-settings" class="form">
+          <div class="form__group">
+            <input
+              type="radio"
+              id="europe"
+              name="continent"
+              value="europe"
+              class="form__radio-input"
+              checked
+            />
+            <label class="form__radio-label" for="europe">
+              <span class="form__radio-button"></span>
+              Europe
+            </label>
+            <input
+              type="radio"
+              id="africa"
+              name="continent"
+              value="africa"
+              class="form__radio-input"
+            />
+            <label class="form__radio-label" for="africa">
+              <span class="form__radio-button"></span>
+              Africa
+            </label>
+
+            <input
+              type="radio"
+              id="americas"
+              name="continent"
+              value="americas"
+              class="form__radio-input"
+            />
+            <label class="form__radio-label" for="americas">
+              <span class="form__radio-button"></span>
+              Americas
+            </label>
+
+            <input
+              type="radio"
+              id="asia"
+              name="continent"
+              value="asia"
+              class="form__radio-input"
+            />
+            <label class="form__radio-label" for="asia">
+              <span class="form__radio-button"></span>
+              Asia
+            </label>
+
+            <input
+              type="radio"
+              id="oceania"
+              name="continent"
+              value="oceania"
+              class="form__radio-input"
+            />
+            <label class="form__radio-label" for="oceania">
+              <span class="form__radio-button"></span>
+              Oceania
+            </label>
+          </div>
+
+          <div class="form__group">
+            <input
+              type="radio"
+              id="easy"
+              name="difficulty"
+              value="6"
+              class="form__radio-input"
+              checked
+            />
+            <label class="form__radio-label" for="easy">
+              <span class="form__radio-button"></span>
+              Easy
+            </label>
+            <input
+              type="radio"
+              id="medium"
+              name="difficulty"
+              value="12"
+              class="form__radio-input"
+            />
+            <label class="form__radio-label" for="medium">
+              <span class="form__radio-button"></span>
+              Medium
+            </label>
+            <input
+              type="radio"
+              id="hard"
+              name="difficulty"
+              value="18"
+              class="form__radio-input"
+            />
+            <label class="form__radio-label" for="hard">
+              <span class="form__radio-button"></span>
+              Hard
+            </label>
+          </div>
+          <button class="btn btn--start">start</button>
+        </form>
+      </div>
+    </section>
+    <section class="game">
+      <div class="run-container u-margin-bottom-small">
+        <span class="run-container__item moves">moves: 0</span>
+        <span class="run-container__item matches">matched: 0/6</span>
+      </div>
+      <div class="game-container u-margin-bottom-big">
+        <!-- <div class="card"></div> -->
+      </div>
+    </section>
   </body>
 </html>

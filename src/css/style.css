@@ -1,259 +1,254 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+html {
+  font-size: 62.5%; }
+
 body {
-  font-family: 'Ubuntu', sans-serif;
-  background-color: #def7b5;
   box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
   color: #606b4e;
-}
+  background-image: linear-gradient(to right bottom, #def7b5, #b0c48f);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh; }
 
-h2,
-h3 {
-  font-size: 60px;
+::selection {
+  background-color: #5e7834;
+  color: #eee; }
+
+.heading-primary {
   font-family: 'Dancing Script', cursive;
   text-align: center;
-  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.233);
-  margin-bottom: 30px;
-}
-h3 {
-  font-size: 28px;
-  margin-bottom: 50px;
-}
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  font-size: 8rem;
+  margin-top: 8rem; }
 
-button {
-  padding: 5px 30px;
-  font-size: 30px;
-  text-align: center;
-  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.055);
+.heading-secondary {
   font-family: 'Dancing Script', cursive;
+  text-align: center;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  font-size: 3.5rem; }
+
+.u-margin-bottom-big {
+  margin-bottom: 8rem !important; }
+
+.u-margin-bottom-medium {
+  margin-bottom: 6rem !important; }
+
+.u-margin-bottom-small {
+  margin-bottom: 4rem !important; }
+
+.btn {
+  padding: 1rem 3rem;
+  font-size: 3rem;
+  font-family: 'Dancing Script', cursive;
+  text-align: center;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
   color: #def7b5;
   background-color: #606b4e;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.233);
-  border-radius: 6px;
+  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.3);
+  border-radius: 2rem;
   border: none;
-  margin: 15px 0px;
-}
-
-header {
-  margin-bottom: 30px;
-}
-
-/* Customize the label (the container) */
-.radio-btn-container {
-  display: flex;
-  padding-left: 35px;
-  margin-bottom: 12px;
+  margin: 1.5rem 0px;
   cursor: pointer;
-  font-size: 16px;
-  align-items: flex-start;
-}
+  transition: all 0.3s; }
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.3); }
+  .btn:active {
+    outline: none;
+    transform: translateY(0);
+    box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.3); }
+  .btn:focus {
+    outline: none; }
 
-/* Hide the browser's default radio button */
-.radio-btn-container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
+.card {
+  perspective: 100rem;
+  position: relative;
+  height: 11rem;
+  width: 11rem;
+  margin: 0.3rem;
+  border-radius: 0.4rem;
+  border: 4px solid transparent; }
+  .card:hover {
+    cursor: pointer; }
+  .card__side {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.4rem;
+    box-shadow: 0 0.4rem 1rem rgba(34, 34, 34, 0.15);
+    backface-visibility: hidden;
+    transition: all 0.8s ease; }
+    .card__side--front {
+      background-image: linear-gradient(to right bottom, #def7b5, #b0c48f); }
+    .card__side--back {
+      padding: 0.4rem;
+      overflow: hidden;
+      background-image: linear-gradient(to right bottom, #def7b5, #b0c48f);
+      transform: rotateY(-180deg); }
+  .card.flip .card__side--front {
+    transform: rotateY(180deg); }
+  .card.flip .card__side--back {
+    transform: rotateY(0deg); }
+  .card.match {
+    animation: match 1.5s ease 0.8s; }
+  .card.no-match {
+    animation: no-match 1.5s ease 0.8s; }
+  .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; }
+  .card__front-text {
+    font-size: 2.5rem;
+    font-weight: 600;
+    font-family: 'Dancing Script', cursive; }
+  .card__back-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center; }
 
-/* Create a custom radio button */
-.checkmark {
-  display: flex;
-  margin-right: 8px;
-  height: 16px;
-  width: 16px;
-  border: 2px solid #606b4e;
-  border-radius: 6px;
-}
+.hidden {
+  visibility: hidden; }
 
-/* On mouse-over, add a grey background color */
-.radio-btn-container:hover input ~ .checkmark {
-  background-color: #606b4e;
-}
+@keyframes match {
+  from {
+    border: 4px solid transparent; }
+  to {
+    border: 4px solid #889e64; } }
 
-/* When the radio button is checked, add a blue background */
-.radio-btn-container input:checked ~ .checkmark {
-  background-color: #606b4e;
-}
-
-/* Create the indicator (the dot/circle - hidden when not checked) */
-.checkmark:after {
-  content: '';
-  position: absolute;
-  display: none;
-}
-
-/* Show the indicator (dot/circle) when checked */
-.radio-btn-container input:checked ~ .checkmark:after {
-  display: flex;
-}
-
-/* Style the indicator (dot/circle) */
-.radio-btn-container .checkmark:after {
-  width: 8px;
-  height: 8px;
-  border-radius: 6px;
-}
-
-.header-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.header-container div {
-  margin-bottom: 20px;
-  font-weight: bold;
-}
-
-#game-settings {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-}
-.set-difficulty,
-.set-continent {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: auto;
-  padding: 0 20px;
-}
-
-@media only screen and (max-width: 650px) {
-  .radio-btn-container {
-    padding-left: 25px;
-    font-size: 14px;
-  }
-  .checkmark {
-    height: 12px;
-    width: 12px;
-    border: 2px solid #606b4e;
-    border-radius: 6px;
-  }
-}
+@keyframes no-match {
+  from {
+    border: 4px solid transparent; }
+  to {
+    border: 4px solid #eba394; } }
 
 .game-container {
   margin: auto;
-  margin-bottom: 50px;
-  max-width: 750px;
+  max-width: 75rem;
   display: flex;
   justify-content: center;
-  align-content: space-around;
   flex-wrap: wrap;
   border-radius: 6px;
-  /* box-shadow: 0 10px 40px rgba(0, 0, 0, 0.233); */
-}
+  transition: all 0.8s ease 0.8s; }
 
-/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
-.card {
-  display: flex;
-  margin: 5px;
-  flex-basis: 100px;
-  width: 100px;
-  height: 100px;
-  border-radius: 6px;
-  border: 4px solid transparent;
-  overflow: hidden;
-  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.096);
-  align-content: center;
-  background-color: transparent;
-  perspective: 1000px; /*Remove this if you don't want the 3D effect */
-}
-
-.card img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-/* This container is needed to position the front and back side */
-.card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-}
-
-/* Do an horizontal flip when you move the mouse over the flip box container */
-.flip .card-inner {
-  transform: rotateY(180deg);
-}
-
-.hidden {
-  visibility: hidden;
-}
-
-.match {
-  transition: border 0.8s linear 0.8s;
-  border: 4px solid #889e64;
-}
-.no-match {
-  transition: border 0.8s linear 0.8s;
-  border: 4px solid #eba394;
-}
-
-/* Position the front and back side */
-.card-front,
-.card-back {
-  background-color: #d3ebac;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
-  backface-visibility: hidden;
-}
-
-/* Style the front side (fallback if image is missing) */
-.card-front {
-  font-family: 'Dancing Script', cursive;
-  color: #6e6e6e;
-  font-size: 25px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Style the back side */
-.card-back {
-  color: #6e6e6e;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: rotateY(180deg);
-}
 .run-container {
+  font-size: 1.5rem;
+  font-weight: 600;
   opacity: 0;
   display: flex;
-  max-width: 650px;
+  max-width: 65rem;
   margin: auto;
-  padding: 0 20px;
-  justify-content: space-around;
-  margin-bottom: 30px;
-}
-.moves,
-.matches {
-  font-size: 16px;
-  font-weight: bold;
-}
+  padding: 0 2rem;
+  justify-content: space-around; }
 
-.win {
-  color: #606b4e;
-  font-weight: bold;
-  font-size: 30px;
-  text-align: center;
-  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.233);
-  position: absolute;
-  top: 0px;
-  width: 900px;
-  height: 350px;
-  border-radius: 6px;
+.header__container {
+  margin: 6rem auto; }
+
+.loader__element {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 0.8rem;
+  background-color: #606b4e;
+  animation: rotating 2s linear infinite; }
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
+.settings {
+  margin: 0 auto; }
+
+.form {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-}
+  justify-content: center;
+  align-items: center; }
+  .form__group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 2rem;
+    padding: 0 3rem; }
+  .form__radio-input {
+    display: none; }
+  .form__radio-label {
+    font-size: 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start; }
+    .form__radio-label:not(:last-child) {
+      margin-right: 1rem; }
+  .form__radio-button {
+    position: relative;
+    display: inline-block;
+    margin-right: 0.8rem;
+    height: 1.6rem;
+    width: 1.6rem;
+    border: 2px solid #606b4e;
+    border-radius: 0.6rem; }
+    .form__radio-button::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #606b4e;
+      height: 1.6rem;
+      width: 1.6rem;
+      border-radius: 0.6rem;
+      opacity: 0; }
+  .form__radio-input:checked + .form__radio-label .form__radio-button::after {
+    opacity: 1; }
+
+.win {
+  background-color: rgba(34, 34, 34, 0.3);
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.233);
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  backdrop-filter: blur(1rem);
+  transition: all 0.3s; }
+  .win__box {
+    padding: 5rem;
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: center;
+    background-color: #def7b5;
+    color: #606b4e;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    width: 50rem;
+    height: 50rem;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center; }
+  .win__heading {
+    font-size: 4rem; }

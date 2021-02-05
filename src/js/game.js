@@ -1,5 +1,6 @@
-import { elements } from './base';
+import { elements, createClassElement } from './base';
 import Card from './Card';
+
 export const selectCards = function (data, numPairs = 18) {
   const cards = [];
   if (numPairs > data.length) {
@@ -32,15 +33,6 @@ export const renderCards = function (cardsToPick, continent) {
   shuffle(cardsToPick).forEach(card => {
     container.append(card.createCard(continent));
   });
-  /* const numCards = cardsToPick.length;
-  // Pick a random card, take it out of the array and render it
-  for (let i = 0; i < numCards; i++) {
-    const [randomCard] = cardsToPick.splice(
-      Math.floor(Math.random() * cardsToPick.length),
-      1
-    );
-    container.append(randomCard.createCard(continent));
-  } */
 };
 
 export const flip = event => {
@@ -52,10 +44,8 @@ export const flip = event => {
   }
 };
 
-const createClassElement = (el, classNames) => {
-  const element = document.createElement(el);
-  element.classList.add(...classNames);
-  return element;
+const showCards = () => {
+  document.querySelector('.win').remove();
 };
 
 export const hideMatched = function (el) {
@@ -84,21 +74,32 @@ export const renderMatches = function (matches, max) {
 
 export const loadGame = function () {
   document.querySelector('.win').remove();
-  elements.headerContainer.classList.remove('hidden');
   elements.gameContainer.innerHTML = '';
   elements.runContainer.style.opacity = 0;
 };
 
-export const winner = () => {
+export const winner = moves => {
   const div = createClassElement('div', ['win']);
-  const btn = createClassElement('button', ['new-game']);
-  const h2 = document.createElement('h2');
+  const box = createClassElement('div', ['win__box']);
+  const btnNewGame = createClassElement('button', ['new-game', 'btn']);
+  const btnNewGameLabel = document.createTextNode('new game');
+  const btnShowCards = createClassElement('button', ['show-cards', 'btn']);
+  const btnShowCardsLabel = document.createTextNode('show cards');
+  const h2 = createClassElement('h2', [
+    'heading-secondary',
+    'win__heading',
+    'u-margin-bottom-medium',
+  ]);
   const text = document.createTextNode('Well done!');
-  const btnLabel = document.createTextNode('new game');
+  const pMoves = createClassElement('p', ['win__text', 'win__text--moves']);
+  const textMoves = document.createTextNode(`moves: ${moves}`);
   h2.append(text);
-  btn.append(btnLabel);
-  div.append(h2, btn);
-  btn.addEventListener('click', loadGame);
+  btnNewGame.append(btnNewGameLabel);
+  btnShowCards.append(btnShowCardsLabel);
+  pMoves.append(textMoves);
+  box.append(h2, pMoves, btnShowCards, btnNewGame);
+  div.append(box);
+  btnNewGame.addEventListener('click', loadGame);
+  btnShowCards.addEventListener('click', showCards);
   elements.gameContainer.append(div);
-  elements.headerContainer.classList.add('hidden');
 };

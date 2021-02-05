@@ -1,0 +1,63 @@
+.settings {
+  margin: 0 auto;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 2rem;
+    padding: 0 3rem;
+  }
+
+  &__radio-input {
+    display: none;
+  }
+
+  &__radio-label {
+    font-size: 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+
+  &__radio-button {
+    position: relative;
+    display: inline-block;
+    margin-right: 0.8rem;
+    height: 1.6rem;
+    width: 1.6rem;
+    border: 2px solid $color-text-dark;
+    border-radius: 0.6rem;
+
+    &::after {
+      content: '';
+      display: block;
+
+      @include absCenter;
+
+      background-color: $color-text-dark;
+      height: 1.6rem;
+      width: 1.6rem;
+      border-radius: 0.6rem;
+
+      opacity: 0;
+    }
+  }
+
+  &__radio-input:checked + &__radio-label &__radio-button::after {
+    opacity: 1;
+  }
+}

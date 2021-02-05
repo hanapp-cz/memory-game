@@ -28,10 +28,16 @@ export default class Card {
   createCard(frontTextStr = '❤') {
     const card = this.createClassElement('div', ['card', 'active']);
     card.setAttribute('id', this._id);
-    const cardInner = this.createClassElement('div', ['card-inner']);
-    const cardFront = this.createClassElement('div', ['card-front']);
-    const cardBack = this.createClassElement('div', ['card-back']);
-    const frontText = document.createElement('p');
+
+    const cardFront = this.createClassElement('div', [
+      'card__side',
+      'card__side--front',
+    ]);
+    const cardBack = this.createClassElement('div', [
+      'card__side',
+      'card__side--back',
+    ]);
+    const frontText = this.createClassElement('p', ['card__front-text']);
     frontText.append(
       frontTextStr.replace(frontTextStr[0], frontTextStr[0].toUpperCase())
     );
@@ -42,12 +48,12 @@ export default class Card {
       cardBack.append(img);
     }
     if (this._text) {
-      const cardText = document.createElement('p');
+      const cardText = this.createClassElement('p', ['card__back-text']);
       cardText.append(this._text);
       cardBack.append(cardText);
     }
-    cardInner.append(cardFront, cardBack);
-    card.append(cardInner);
+
+    card.append(cardFront, cardBack);
 
     return card;
   }
