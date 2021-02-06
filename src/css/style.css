@@ -92,6 +92,7 @@ body {
     justify-content: center;
     border-radius: 0.4rem;
     box-shadow: 0 0.4rem 1rem rgba(34, 34, 34, 0.15);
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     transition: all 0.8s ease; }
     .card__side--front {
