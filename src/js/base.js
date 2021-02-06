@@ -8,10 +8,6 @@ export const elements = {
   newGameBtn: document.querySelector('.new-game'),
 };
 
-export const elementStrings = {
-  loader: 'loader',
-};
-
 export const createClassElement = (el, classNames) => {
   const element = document.createElement(el);
   element.classList.add(...classNames);
@@ -19,11 +15,11 @@ export const createClassElement = (el, classNames) => {
 };
 
 export const renderLoader = parent => {
-  const loader = createClassElement('div', ['loader__element']);
+  const loader = createClassElement('div', ['loader']);
   parent.insertAdjacentElement('afterbegin', loader);
 };
 
 export const clearLoader = () => {
-  const loader = document.querySelector(`.${elementStrings.loader}`);
-  if (loader) loader.parentElement.removeChild(loader);
+  const loader = document.querySelector(`.loader`);
+  if (loader) loader.remove();
 };

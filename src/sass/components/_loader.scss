@@ -1,11 +1,9 @@
 .loader {
-  &__element {
-    height: 5rem;
-    width: 5rem;
-    border-radius: 0.8rem;
-    background-color: $color-text-dark;
-    animation: rotating 2s linear infinite;
-  }
+  height: 5rem;
+  width: 5rem;
+  border-radius: 0.8rem;
+  background-color: $color-text-dark;
+  animation: rotating 2s linear infinite;
 }
 
 @keyframes rotating {
