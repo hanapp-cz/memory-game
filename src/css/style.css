@@ -94,7 +94,7 @@ body {
     box-shadow: 0 0.4rem 1rem rgba(34, 34, 34, 0.15);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    transition: all 0.8s ease; }
+    transition: transform 0.8s ease; }
     .card__side--front {
       background-image: linear-gradient(to right bottom, #def7b5, #b0c48f); }
     .card__side--back {
@@ -111,6 +111,8 @@ body {
   .card.no-match {
     animation: no-match 1.5s ease 0.8s; }
   .card img {
+    transform: translate(0, 0);
+    /*firefox*/
     width: 100%;
     height: 100%;
     object-fit: contain; }
@@ -223,7 +225,7 @@ body {
     opacity: 1; }
 
 .win {
-  background-color: rgba(34, 34, 34, 0.3);
+  background-color: rgba(34, 34, 34, 0.8);
   text-shadow: 0 2px 3px rgba(0, 0, 0, 0.233);
   height: 100vh;
   width: 100%;
@@ -231,8 +233,12 @@ body {
   top: 0;
   left: 0;
   z-index: 9999;
-  backdrop-filter: blur(1rem);
   transition: all 0.3s; }
+  @supports (-webkit-backdrop-filter: blur(1rem)) or (backdrop-filter: blur(1rem)) {
+    .win {
+      -webkit-backdrop-filter: blur(1rem);
+      backdrop-filter: blur(1rem);
+      background-color: rgba(34, 34, 34, 0.3); } }
   .win__box {
     padding: 5rem;
     font-weight: bold;
