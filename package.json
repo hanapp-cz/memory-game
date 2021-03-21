@@ -11,7 +11,7 @@
     "prefix:css": "postcss --use autoprefixer -b 'last 10 versions' src/css/style.comp.css -o src/css/style.prefix.css",
     "compress:css": "node-sass src/css/style.prefix.css src/css/style.css --output-style compressed",
     "build:css": "npm-run-all compile:sass prefix:css compress:css",
-    "watch:sass": "node-sass src/sass/main.scss src/css/style.comp.css -w",
+    "watch:sass": "node-sass src/sass/main.scss src/css/style.css -w",
     "start": "npm-run-all --parallel devserver watch:sass",
     "build": "npm-run-all build:css wp:build"
   },
@@ -21,7 +21,7 @@
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
     "autoprefixer": "^10.2.4",
-    "babel-loader": "^8.1.0",
+    "babel-loader": "^8.2.2",
     "copy-webpack-plugin": "^6.2.1",
     "css-loader": "^4.3.0",
     "file-loader": "^6.1.1",

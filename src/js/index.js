@@ -1,107 +1,99 @@
 import '../css/style.css';
-import { elements, renderLoader, clearLoader } from './base';
-import Countries from './Countries';
 import * as game from './game';
+import gameView from './views/gameView';
+import runView from './views/runView';
+import settingsView from './views/settingsView';
 
-/** Global state of the app
- * - Game status
- * - Number of moves
- * - Currently turned cards
- * - Matched cards
- */
-const state = {
-  win: false,
-  moves: 0,
-  turned: [],
-  matched: [],
+const controlGameReset = function () {
+  gameView.clear();
+  runView.hideContainer();
+};
+const controlShowCards = function () {
+  gameView.removeWinner();
+  runView.hideContainer();
 };
 
-const gameContainer = elements.gameContainer;
-
-const countriesApiService = new Countries(
-  'https://restcountries.eu/rest/v2/region/'
-);
-
-elements.settings.addEventListener('submit', async function (event) {
+const controlGameSetup = async function () {
   try {
-    event.preventDefault();
-    gameContainer.innerHTML = '';
-    renderLoader(gameContainer);
-    // get input from form
-    const settings = new FormData(event.target);
-    state.settings = Object.fromEntries(settings);
-    // reset the global state
-    state.win = false;
-    state.moves = 0;
-    state.matched = [];
-    state.turned = [];
+    gameView.renderSpinner();
+    game.resetState();
+    game.state.settings = settingsView.getSettings();
 
-    // fetch the data
-    const data = await countriesApiService.getData(state.settings.continent);
-    clearLoader();
-    // pick the number of pairs based on chosen difficulty
-    const cards = game.selectCards(data, Number(state.settings.difficulty));
-    // copy cards array and store current deck in the state variable
-    state.cardDeck = cards;
-    const cardsToPick = cards.slice();
-    // render cards, moves, matches
-    game.renderCards(cardsToPick, state.settings.continent);
-    game.renderMoves(state.moves);
-    game.renderMatches(state.matched.length / 2, state.settings.difficulty);
-    elements.runContainer.style.opacity = 1;
+    await game.loadCountries();
+    game.createCardDeck();
+
+    gameView.renderCards(game.state.cardDeck, game.state.settings.continent);
+    runView.renderMoves(game.state.moves);
+    runView.renderMatches(
+      game.state.matched.length / 2,
+      game.state.settings.difficulty
+    );
+    runView.showContainer();
   } catch (err) {
     console.error(err);
   }
-});
+};
 
-gameContainer.addEventListener('click', event => {
-  let currCard;
-  // if game is on and there are not 2 turned cards yet, turn card
-  if (state.turned.length < 2 && !state.win) currCard = game.flip(event);
+const controlGame = function (event) {
+  // TODO refactor -------------------------------------------------------------------//
+  let currCard = event.target.closest('.active');
+  if (game.state.win || !currCard) return;
 
-  if (currCard && currCard.id != state.turned[0]?.id) {
+  // if there are not 2 turned cards yet, turn card
+  if (game.state.turned.length < 2) {
+    gameView.flip(currCard);
+  }
+
+  if (currCard.id != game.state.turned[0]?.id) {
     // add card to currently turned cards
-    state.turned ? state.turned.push(currCard) : (state.turned = [currCard]);
-    if (state.turned.length === 2) {
+    game.state.turned.push(currCard);
+
+    if (game.state.turned.length === 2) {
       // two cards turned
-      state.moves++;
-      game.renderMoves(state.moves);
+      game.state.moves++;
+      runView.renderMoves(game.state.moves);
+
       if (
         // condition for match
-        Math.abs(state.turned[0].id - state.turned[1].id) ==
-        state.cardDeck.length / 2
+        Math.abs(game.state.turned[0].id - game.state.turned[1].id) ==
+        game.state.cardDeck.length / 2
       ) {
         // matched cards - green border for 2 seconds and hide matched cards
 
-        state.turned.forEach(el => {
+        game.state.turned.forEach(el => {
           el.classList.add('match');
         });
         setTimeout(() => {
-          state.turned.forEach(game.hideMatched);
-          state.matched.push(...state.turned.splice(0));
-          game.renderMatches(
-            state.matched.length / 2,
-            state.settings.difficulty
+          game.state.turned.forEach(game.hideMatched);
+          game.state.matched.push(...game.state.turned.splice(0));
+          runView.renderMatches(
+            game.state.matched.length / 2,
+            game.state.settings.difficulty
           );
           // if all cards are matched, end of the game - turn all cards to review and display win screen
-          if (state.matched.length >= state.cardDeck.length) {
-            state.win = true;
-            game.winner(state.moves);
-            state.matched.forEach(game.showAll);
-            state.matched = [];
-            state.moves = 0;
+          if (game.state.matched.length >= game.state.cardDeck.length) {
+            game.state.win = true;
+            gameView.renderWinner(game.state.moves);
+            gameView.addHandlerNewGame(controlGameReset);
+            gameView.addHandlerShowCards(controlShowCards);
+            gameView.showAllCards(game.state.matched);
           }
         }, 2000);
       } else {
         // two cards were turned, but they do not match - add red border for 2 seconds then turn them back
-        state.turned.forEach(el => {
+        game.state.turned.forEach(el => {
           el.classList.add('no-match');
         });
         setTimeout(() => {
-          state.turned.forEach(game.turnBack);
-          state.turned.splice(0);
+          game.state.turned.forEach(game.turnBack);
+          game.state.turned.splice(0);
         }, 2000);
       }
     }
   }
-});
+};
+const init = function () {
+  settingsView.addHandlerStartGame(controlGameSetup);
+  gameView.addHandlerControlGame(controlGame);
+};
+init();
