@@ -71,8 +71,27 @@ class gameView extends View {
     cardElement.classList.add('flip');
   }
 
+  highlightCards(cards, className) {
+    cards.forEach(card => {
+      card.classList.add(className);
+    });
+  }
+
   showAllCards(cards) {
     cards.forEach(card => card.classList.replace('hidden', 'flip'));
+  }
+
+  hideMatched(cards) {
+    cards.forEach(card => {
+      card.classList.remove('match', 'flip');
+      card.classList.replace('active', 'hidden');
+    });
+  }
+
+  turnBack(cards) {
+    cards.forEach(card => {
+      card.classList.remove('no-match', 'flip');
+    });
   }
 }
 export default new gameView(document.querySelector('.game-container'));

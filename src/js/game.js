@@ -37,6 +37,13 @@ export const loadCountries = async function () {
   state.countries = await getData(url);
 };
 
+const shuffle = function (arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * i);
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+};
+
 export const createCardDeck = function () {
   const numCountries = state.countries.length;
   const numPairs = Number(state.settings.difficulty);
@@ -54,24 +61,20 @@ export const createCardDeck = function () {
       new Card(i + numPairs + 1, cardData.name, undefined, cardData.name)
     );
   }
-
   shuffle(state.cardDeck);
 };
 
-const shuffle = function (arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * i);
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
+export const isMatch = function () {
+  return (
+    Math.abs(state.turned[0].id - state.turned[1].id) ===
+    state.cardDeck.length / 2
+  );
 };
 
-// TODO move to gameView ------------------------------------------------------------------//
-export const hideMatched = function (el) {
-  el.classList.remove('match', 'flip');
-  el.classList.replace('active', 'hidden');
+export const isGameEnd = function () {
+  return state.matched.length >= state.cardDeck.length;
 };
 
-export const turnBack = function (el) {
-  el.classList.remove('no-match');
-  el.classList.remove('flip');
+export const clearTurned = function () {
+  return state.turned.splice(0);
 };
