@@ -1,4 +1,6 @@
 import '../css/style.css';
+import { PAUSE_SECONDS } from './config';
+import { pause } from './helpers';
 import * as game from './game';
 import gameView from './views/gameView';
 import runView from './views/runView';
@@ -34,7 +36,7 @@ const controlGameSetup = async function () {
   }
 };
 
-const controlGame = function (event) {
+const controlGame = async function (event) {
   // TODO refactor -------------------------------------------------------------------//
   let currCard = event.target.closest('.active');
   if (game.state.win || !currCard) return;
@@ -63,31 +65,30 @@ const controlGame = function (event) {
         game.state.turned.forEach(el => {
           el.classList.add('match');
         });
-        setTimeout(() => {
-          game.state.turned.forEach(game.hideMatched);
-          game.state.matched.push(...game.state.turned.splice(0));
-          runView.renderMatches(
-            game.state.matched.length / 2,
-            game.state.settings.difficulty
-          );
-          // if all cards are matched, end of the game - turn all cards to review and display win screen
-          if (game.state.matched.length >= game.state.cardDeck.length) {
-            game.state.win = true;
-            gameView.renderWinner(game.state.moves);
-            gameView.addHandlerNewGame(controlGameReset);
-            gameView.addHandlerShowCards(controlShowCards);
-            gameView.showAllCards(game.state.matched);
-          }
-        }, 2000);
+
+        await pause(PAUSE_SECONDS);
+        game.state.turned.forEach(game.hideMatched);
+        game.state.matched.push(...game.state.turned.splice(0));
+        runView.renderMatches(
+          game.state.matched.length / 2,
+          game.state.settings.difficulty
+        );
+        // if all cards are matched, end of the game - turn all cards to review and display win screen
+        if (game.state.matched.length >= game.state.cardDeck.length) {
+          game.state.win = true;
+          gameView.renderWinner(game.state.moves);
+          gameView.addHandlerNewGame(controlGameReset);
+          gameView.addHandlerShowCards(controlShowCards);
+          gameView.showAllCards(game.state.matched);
+        }
       } else {
         // two cards were turned, but they do not match - add red border for 2 seconds then turn them back
         game.state.turned.forEach(el => {
           el.classList.add('no-match');
         });
-        setTimeout(() => {
-          game.state.turned.forEach(game.turnBack);
-          game.state.turned.splice(0);
-        }, 2000);
+        await pause(PAUSE_SECONDS);
+        game.state.turned.forEach(game.turnBack);
+        game.state.turned.splice(0);
       }
     }
   }

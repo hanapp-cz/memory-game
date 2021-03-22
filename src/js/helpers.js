@@ -1,5 +1,9 @@
 import { TIMEOUT_SECONDS } from './config.js';
 
+export const pause = function (s) {
+  return new Promise(resolve => setTimeout(resolve, s * 1000));
+};
+
 const timeout = function (s) {
   return new Promise(function (_, reject) {
     setTimeout(function () {
